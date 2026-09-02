@@ -21,6 +21,7 @@ Use this mode for native desktop applications, graphical tools, packaged games, 
 - Use accessibility information for semantic controls when available and screenshots for visual judgment.
 - Interact only with the authorized target application. Do not automate authentication dialogs, security tools, password managers, or the ChatGPT/Codex interface.
 - Follow action-time confirmation requirements for deletion, submission, uploads, purchases, permission changes, and other consequential actions.
+- For games, simulations, animated canvases, or other continuously changing programs, also read [dynamic-scenes.md](dynamic-scenes.md). Prefer application-level replay or test controls when UI automation cannot reproduce high-rate or simultaneous inputs reliably.
 
 ## Rebuild and verify
 

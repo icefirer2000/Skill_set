@@ -1,11 +1,11 @@
 ---
 name: visual-app-improver
-description: Run and iteratively improve local projects or executable applications with a visual interface by capturing repeatable screenshots, comparing them with user requirements or references, fixing editable source, and verifying the final result. Use for autonomous visual QA and refinement of web apps, desktop apps, games, and 3D visualizations; do not use for non-visual binaries or production deployment.
+description: Run and iteratively improve local visual projects and executable applications by observing repeatable states and input sequences, comparing them with requirements or references, fixing editable source, and verifying the result. Use for autonomous visual QA and refinement of web apps, desktop apps, animated interfaces, games, simulations, and 3D visualizations; do not use for non-visual binaries or production deployment.
 ---
 
 # Visual App Improver
 
-Turn a runnable visual project into a verified final version through an evidence-driven loop: launch, observe, evaluate, edit, rerun, and compare.
+Turn a runnable visual project into a verified final version through an evidence-driven loop: launch, observe, evaluate, edit, rerun, and compare. Adapt the evidence to the target: stable screenshots for static states, and repeatable input traces plus temporal checkpoints for animated or continuously changing scenes.
 
 ## Establish the target
 
@@ -19,6 +19,7 @@ Turn a runnable visual project into a verified final version through an evidence
 
 - For a browser-rendered project, read [references/web-projects.md](references/web-projects.md) and use the Browser skill for page interaction, screenshots, console inspection, and local web testing.
 - For a native desktop program or graphical executable, read [references/desktop-executables.md](references/desktop-executables.md) and use the Computer Use skill for window capture and authorized interaction.
+- If the result changes over time or depends on continuous input, physics, simulation, camera movement, or animation timing, read [references/dynamic-scenes.md](references/dynamic-scenes.md). Use its replay and checkpoint protocol instead of treating one screenshot as sufficient evidence.
 - For either mode, read [references/visual-evaluation.md](references/visual-evaluation.md) when judging against an effect image, design reference, 3D scene, or detailed visual requirements.
 - Prefer structured logs, DOM/accessibility state, application APIs, and test output for semantic facts. Use screenshots for appearance and visible interaction state.
 
@@ -38,8 +39,8 @@ Follow the active Browser or Computer Use confirmation policy for UI actions. Ne
 
 ## Capture a stable baseline
 
-1. Start the target and wait until the relevant view is stable. Record launch failures and visible loading states instead of judging a half-loaded frame as final UI.
-2. Capture the smallest useful set of repeatable states: the default view, required interactions, important responsive sizes, and relevant camera angles or model states.
+1. Start the target and wait until required resources are loaded. For continuously changing scenes, establish a controlled checkpoint rather than waiting for motion to stop. Record launch failures and visible loading states instead of judging a half-loaded result as final UI.
+2. Capture the smallest useful set of repeatable states: the default view, required interactions, important responsive sizes, and relevant camera angles or model states. For dynamic behavior, also record the initial conditions, input trace, timing tolerances, and checkpoints needed to reproduce it.
 3. Record visible defects and supporting diagnostics such as build errors, console errors, failed resources, layout overflow, or broken interactions.
 4. Convert requirements into an acceptance matrix. Mark each criterion `pass`, `partial`, `fail`, or `blocked`, with observable evidence. Distinguish observation from inference.
 
@@ -62,8 +63,8 @@ For each coherent group of fixes:
 1. Make the smallest source changes that address the highest-priority evidence.
 2. Run focused checks or builds proportional to the change.
 3. Reload or relaunch the target.
-4. Reproduce the same state, viewport, camera, and interaction used in the baseline.
-5. Capture new evidence and update the acceptance matrix.
+4. Reproduce the same state, viewport, camera, data, and interaction used in the baseline. Replay the same timed input trace when dynamic behavior is in scope.
+5. Capture new evidence at the same checkpoints and update the acceptance matrix.
 6. Check nearby states for regressions before continuing.
 
 Continue autonomously while safe, relevant changes produce measurable progress. Do not ask the user to approve ordinary local edits one by one.
@@ -81,9 +82,9 @@ Stop the loop when one of these is true:
 Leave the verified working version in the requested project location. Provide:
 
 - the final runnable result and exact start command;
-- final screenshots for the states used in acceptance;
+- final screenshots or temporal checkpoints for the states and sequences used in acceptance;
 - a concise list of material fixes;
-- tests, builds, and interactions verified;
+- tests, builds, interactions, input traces, and measured runtime signals verified;
 - remaining deviations or blockers, if any; and
 - the location of changed source files or produced artifacts.
 

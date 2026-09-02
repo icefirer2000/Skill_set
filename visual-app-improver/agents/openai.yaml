@@ -1,4 +1,4 @@
 interface:
   display_name: "Visual App Improver"
-  short_description: "Iteratively improve runnable visual apps from screenshots"
-  default_prompt: "Use $visual-app-improver to run this visual project, compare it with the requirements, fix issues, and deliver the verified final version."
+  short_description: "Improve static and dynamic visual apps through repeatable QA"
+  default_prompt: "Use $visual-app-improver to run this visual project, reproduce its important states or interactions, compare them with the requirements, fix editable source, and deliver the verified final version."

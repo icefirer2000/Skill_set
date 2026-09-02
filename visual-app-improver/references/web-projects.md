@@ -36,6 +36,8 @@ For WebGL or 3D scenes, also verify:
 - resizing and high-DPI behavior; and
 - frame stability during representative interaction, without claiming a precise performance result unless it was measured.
 
+If animation, continuous controls, physics, or simulation state affects acceptance, also read [dynamic-scenes.md](dynamic-scenes.md) and define a repeatable input trace with temporal checkpoints.
+
 ## Editing and regression
 
 - Fix source components, styles, shaders, scene configuration, assets, or build settings rather than the generated bundle.

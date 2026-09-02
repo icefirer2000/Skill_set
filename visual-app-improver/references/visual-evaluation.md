@@ -30,6 +30,7 @@ For each criterion record:
 - Separate genuine defects from capture differences such as DPI scaling, browser chrome, compression, color management, or a mismatched camera.
 - Use exact pixel comparison only when the target is expected to be deterministic and pixel-matched. Otherwise compare structure and perceptually important differences.
 - Do not infer invisible functionality from a screenshot. Verify interactions directly and use logs or structured state for semantic facts.
+- A single screenshot does not prove animation, physics, transition, or control behavior. For time-dependent requirements, compare equivalent checkpoints from the same initial state and input trace using [dynamic-scenes.md](dynamic-scenes.md).
 
 ## Prioritize useful changes
 
